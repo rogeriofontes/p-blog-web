@@ -9,7 +9,7 @@ import { PostTag } from "@/models/tag";
 
 export default function TagsPage() {
   const router = useRouter();
-  const { token, user, logout } = useAuthStore();
+  const { token, userId, logout } = useAuthStore();
   const [tags, setTags] = useState<PostTag[]>([]);
   const [newTag, setNewTag] = useState<string>("");
   const [editingTag, setEditingTag] = useState<PostTag | null>(null);
@@ -74,7 +74,7 @@ export default function TagsPage() {
     <div className="flex flex-col items-center min-h-screen bg-white text-black font-sans">
       {/* Header - Topo preto preenchendo toda a largura */}
       <header className="w-full bg-black text-white py-4 px-6 flex justify-between items-center shadow-md">
-        <h1 className="text-2xl font-bold tracking-tight">Blog Minimal</h1>
+      <h1 className="text-2xl font-bold tracking-tight"><Link href="/dashboard" className="text-white-700 hover:underline">Blog Minimal</Link></h1>
 
         {/* Menu de navegação */}
         {token ? (
@@ -87,9 +87,6 @@ export default function TagsPage() {
             </Link>
             <Link href="/dashboard/tags" className="hover:underline">
               Tags
-            </Link>
-            <Link href="/dashboard/comments" className="hover:underline">
-              Comentários
             </Link>
           </nav>
         ) : null}
@@ -112,7 +109,7 @@ export default function TagsPage() {
           </div>
         ) : (
           <div className="flex items-center gap-4">
-            <span className="text-sm">Logado como: <b>{user?.username}</b></span>
+            <span className="text-sm">Logado como: <b>{userId}</b></span>
             <button
               onClick={logout}
               className="border border-white px-4 py-2 rounded hover:bg-red-700 transition"

@@ -1,5 +1,3 @@
-import { User } from "@/models/user";
-import router from "next/router";
 import { create } from "zustand";
 
 type AuthState = {
@@ -21,6 +19,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     console.log("Logging out...");
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     set({ token: null, userId: null });
   },
 }));

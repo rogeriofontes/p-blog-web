@@ -3,7 +3,7 @@ import api from "./api";
 // Obtém a contagem de likes ou dislikes para um post específico
 export const getReactions = async (postId: string, type: "likes" | "dislikes") => {
   try {
-    const response = await api.get(`/reactions/${type}/${postId}`);
+    const response = await api.get(`/reactions/${type}/post/${postId}`);
     console.log(response.data);
     return response.data; // Retorna apenas a contagem
   } catch (error) {
@@ -48,7 +48,7 @@ export const removeReaction = async (postId: string) => {
 
 export const getUserReaction = async (postId: string) => {
   try {
-    const response = await fetch(`/api/reactions/${postId}/user`, {
+    const response = await fetch(`/api/reactions?post_id=${postId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
